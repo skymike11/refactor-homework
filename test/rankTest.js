@@ -282,4 +282,93 @@ rankTest('should_return_1_when_call_voyageProfitFactor_given_voyage_zone_west-in
     t.is(result, 1);
 });
 
+rankTest('should_return_7_when_call_voyageProfitFactor_given_voyage_zone_china_length_15_and_history_length_3', t => {
+    //given
+    const voyage = {
+        zone: 'china',
+        length: 15,
+    };
+    const history = [
+        {
+            zone: 'east-indies',
+            profit: 5,
+        },{
+            zone: 'west-indies',
+            profit: 15,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'china',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+    ];
+    //when
+    let result = voyageProfitFactor(voyage, history);
+    //then
+    t.is(result, 7);
+});
+
+rankTest('should_return_1_when_call_voyageProfitFactor_given_voyage_zone_china_length_19_and_history_length_10', t => {
+    //given
+    const voyage = {
+        zone: 'china',
+        length: 19,
+    };
+    const history = [
+        {
+            zone: 'east-indies',
+            profit: 5,
+        },{
+            zone: 'west-indies',
+            profit: 15,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'china',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+    ];
+    //when
+    let result = voyageProfitFactor(voyage, history);
+    //then
+    t.is(result, 7);
+});
 
