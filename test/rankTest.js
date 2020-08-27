@@ -1,11 +1,6 @@
-import {captainHistoryRisk, hasChina, rating, voyageRisk} from "../src/rank";
+import {captainHistoryRisk, hasChina, rating, voyageProfitFactor, voyageRisk} from "../src/rank";
 
 const rankTest = require('ava');
-
-rankTest('bar', async t => {
-    const bar = Promise.resolve('bar');
-    t.is(await bar, 'bar');
-});
 
 rankTest('should_return_true_when_call_hasChina_given_history_with_china', t => {
     //given
@@ -221,5 +216,70 @@ rankTest('should_return_rank_A_when_rating_by_voyage_given_voyage_with_east-indi
 });
 
 
+rankTest('should_return_2_when_call_voyageProfitFactor_given_voyage_zone_west-indies_length_4_and_history_length_3', t => {
+    //given
+    const voyage = {
+        zone: 'west-africa',
+        length: 4,
+    };
+    const history = [
+        {
+            zone: 'east-indies',
+            profit: 5,
+        },{
+            zone: 'west-indies',
+            profit: 15,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+    ];
+    //when
+    let result = voyageProfitFactor(voyage, history);
+    //then
+    t.is(result, 2);
+});
+
+rankTest('should_return_1_when_call_voyageProfitFactor_given_voyage_zone_west-indies_length_15_and_history_length_3', t => {
+    //given
+    const voyage = {
+        zone: 'west-africa',
+        length: 15,
+    };
+    const history = [
+        {
+            zone: 'east-indies',
+            profit: 5,
+        },{
+            zone: 'west-indies',
+            profit: 15,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+    ];
+    //when
+    let result = voyageProfitFactor(voyage, history);
+    //then
+    t.is(result, 1);
+});
 
 
