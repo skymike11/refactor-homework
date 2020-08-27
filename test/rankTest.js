@@ -20,6 +20,21 @@ rankTest('should_return_true_when_call_hasChina_given_history_with_china', t => 
     //then
     t.is(result, true)
 });
+
+rankTest('should_return_false_when_call_hasChina_given_history_without_china', t => {
+    //given
+    const history = [
+        {
+            zone: 'west-indies',
+            profit: 5,
+        }
+    ];
+    //when
+    let result = hasChina(history);
+    //then
+    t.is(result, false)
+});
+
 rankTest('should_return_rank_B_when_rating_by_voyage_given_voyage_with_east-indies_zone_and_4_length', t => {
     //given
     const voyage = {
