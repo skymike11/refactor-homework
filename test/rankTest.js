@@ -1,4 +1,4 @@
-import {hasChina, rating} from "../src/rank";
+import {hasChina, rating, voyageRisk} from "../src/rank";
 
 const rankTest = require('ava');
 
@@ -33,6 +33,29 @@ rankTest('should_return_false_when_call_hasChina_given_history_without_china', t
     let result = hasChina(history);
     //then
     t.is(result, false)
+});
+rankTest('should_return_1_when_call_voyageRisk_given_voyage_length_1_zone_west-indies', t => {
+    //given
+    const voyage = {
+        zone: 'west-indies',
+        length: 1,
+    };
+    //when
+    let result = voyageRisk(voyage);
+    //then
+    t.is(result, 1);
+});
+
+rankTest('should_return_5_when_call_voyageRisk_given_voyage_length_1_zone_east-indies', t => {
+    //given
+    const voyage = {
+        zone: 'east-indies',
+        length: 1,
+    };
+    //when
+    let result = voyageRisk(voyage);
+    //then
+    t.is(result, 5);
 });
 
 rankTest('should_return_rank_B_when_rating_by_voyage_given_voyage_with_east-indies_zone_and_4_length', t => {
