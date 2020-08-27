@@ -58,6 +58,30 @@ rankTest('should_return_5_when_call_voyageRisk_given_voyage_length_1_zone_east-i
     t.is(result, 5);
 });
 
+rankTest('should_return_7_when_call_voyageRisk_given_voyage_length_5_zone_east-indies', t => {
+    //given
+    const voyage = {
+        zone: 'east-indies',
+        length: 5,
+    };
+    //when
+    let result = voyageRisk(voyage);
+    //then
+    t.is(result, 7);
+});
+
+rankTest('should_return_7_when_call_voyageRisk_given_voyage_length_10_zone_east-indies', t => {
+    //given
+    const voyage = {
+        zone: 'east-indies',
+        length: 10,
+    };
+    //when
+    let result = voyageRisk(voyage);
+    //then
+    t.is(result, 9);
+});
+
 rankTest('should_return_rank_B_when_rating_by_voyage_given_voyage_with_east-indies_zone_and_4_length', t => {
     //given
     const voyage = {
