@@ -108,6 +108,82 @@ rankTest('should_return_5_when_call_captainHistoryRisk_given_voyage_length_4_zon
 
 });
 
+rankTest('should_return_0_when_call_captainHistoryRisk_given_voyage_zone_china_and_history_all_profit_more_then_0', t => {
+    //given
+    const voyage = {
+        zone: 'china',
+        length: 4,
+    };
+    const history = [
+        {
+            zone: 'east-indies',
+            profit: 5,
+        },{
+            zone: 'west-indies',
+            profit: 15,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'china',
+            profit: -2,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+    ];
+    //when
+    let result = captainHistoryRisk(voyage, history);
+    //then
+    t.is(result, 0);
+
+});
+
+rankTest('should_return_2_when_call_captainHistoryRisk_given_voyage_zone_west-africa_and_history_all_profit_more_then_0', t => {
+    //given
+    const voyage = {
+        zone: 'west-africa',
+        length: 4,
+    };
+    const history = [
+        {
+            zone: 'east-indies',
+            profit: 5,
+        },{
+            zone: 'west-indies',
+            profit: 15,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'china',
+            profit: -2,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+        {
+            zone: 'west-africa',
+            profit: 7,
+        },
+    ];
+    //when
+    let result = captainHistoryRisk(voyage, history);
+    //then
+    t.is(result, 2);
+
+});
+
 rankTest('should_return_rank_B_when_rating_by_voyage_given_voyage_with_east-indies_zone_and_4_length', t => {
     //given
     const voyage = {
