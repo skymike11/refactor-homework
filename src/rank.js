@@ -35,17 +35,15 @@ function getHistoryLength(history) {
     return history.length > 8 ? 1 : 0;
 }
 
-function getVoyageLength(voyage) {
-    return voyage.length > 14 ? -1 : 0;
+function isChinaZoneAndHistoryWithChina(voyage, history) {
+    return voyage.zone === 'china' && hasChina(history);
 }
 
 function getVoyageAndHistory(voyage, history) {
     let result = 0;
-    if (voyage.zone === 'china' && hasChina(history)) {
+    if (isChinaZoneAndHistoryWithChina(voyage, history)) {
         result += 3;
-        if (history.length > 10) {
-            result += 1;
-        }
+        result += getHistoryLength(history);
         if (voyage.length > 12) {
             result += 1;
         }
@@ -53,9 +51,7 @@ function getVoyageAndHistory(voyage, history) {
             result -= 1;
         }
     } else {
-        if (history.length > 8) {
-            result += 1;
-        }
+        result += getHistoryLength(history);
         if (voyage.length > 14) {
             result -= 1;
         }
