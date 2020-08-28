@@ -30,9 +30,7 @@ function printOwing(invoice) {
     let outstanding = 0;
     let result = "";
     result += getBanner();
-
-    outstanding = calcultateOutstandings(invoice, outstanding);
-    result += getPrintDetail(invoice, outstanding, getRecordDate(invoice));
+    result += getPrintDetail(invoice, calcultateOutstandings(invoice, outstanding), getRecordDate(invoice));
     return result;
 }
 
