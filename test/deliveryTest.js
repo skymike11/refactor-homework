@@ -80,3 +80,19 @@ deliveryTest('should_return_plusDays_5_when_deliveryDate_given_anOrder_with_ME_s
     let result = deliveryDate(anOrder, isRush);
     t.is(result, 5)
 });
+
+deliveryTest('should_return_plusDays_5_when_deliveryDate_given_anOrder_with_none_state_isRush_false', t => {
+    //given
+    const isRush = false;
+    const anOrder = {
+        deliveryState : "none",
+        placedOn : {
+            plusDays : (deliveryTime)=>{
+                return deliveryTime
+            }
+        }
+    };
+    //when
+    let result = deliveryDate(anOrder, isRush);
+    t.is(result, 6)
+});
