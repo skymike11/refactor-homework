@@ -1,24 +1,39 @@
-function printOwing (invoice) {
-  let outstanding = 0;
-  let result = "";
-  result +='***********************\n';
-  result +='**** Customer Owes ****\n';
-  result +='***********************\n';
+function getBanner() {
+    let banner = "";
+    banner += '***********************\n';
+    banner += '**** Customer Owes ****\n';
+    banner += '***********************\n';
+    return banner;
+}
 
-  // calculate outstanding
-  for (const o of invoice.borderSpacing) {
-    outstanding += o.amount;
-  }
+function calcultateOutstandings(invoice, outstanding) {
+    for (const o of invoice.borderSpacing) {
+        outstanding += o.amount;
+    }
+    return outstanding;
+}
 
-  // record due date
-  const today = new Date();
-  invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+function getRecordDate(invoice) {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+}
 
-  // print details
-  result +=`name: ${invoice.customer}\n`;
-  result +=`amount: ${outstanding}\n`;
-  result +=`amount: ${invoice.dueDate.toLocaleDateString()}\n`;
-  return result;
+function getPrintDetail(invoice, outstanding, dueDate) {
+    let detail = "";
+    detail += `name: ${invoice.customer}\n`;
+    detail += `amount: ${outstanding}\n`;
+    detail += `amount: ${dueDate.toLocaleDateString()}\n`;
+    return detail;
+}
+
+function printOwing(invoice) {
+    let outstanding = 0;
+    let result = "";
+    result += getBanner();
+
+    outstanding = calcultateOutstandings(invoice, outstanding);
+    result += getPrintDetail(invoice, outstanding, getRecordDate(invoice));
+    return result;
 }
 
 module.exports = {
