@@ -41,21 +41,8 @@ function isChinaZoneAndHistoryWithChina(voyage, history) {
 
 function getVoyageAndHistory(voyage, history) {
     let result = 0;
-    if (isChinaZoneAndHistoryWithChina(voyage, history)) {
-        result += 3;
-        result += getHistoryLength(history);
-        if (voyage.length > 12) {
-            result += 1;
-        }
-        if (voyage.length > 18) {
-            result -= 1;
-        }
-    } else {
-        result += getHistoryLength(history);
-        if (voyage.length > 14) {
-            result -= 1;
-        }
-    }
+    result += resultCalculate(isChinaZoneAndHistoryWithChina(voyage, history) ?
+        'withChinaZoneAndHistory' : 'withOutChinaZoneAndHistory', voyage, history);
     return result;
 }
 
@@ -70,6 +57,32 @@ function voyageProfitFactor(voyage, history) {
     result += getVoyageAndHistory(voyage, history);
     return result;
 }
+
+const resultCalculate = (strategyName, voyage, history) => {
+    return voyageAndHistoryStrategy[strategyName](voyage, history);
+};
+
+const voyageAndHistoryStrategy = {
+    withChinaZoneAndHistory(voyage, history) {
+        let result = 3;
+        result += getHistoryLength(history);
+        if (voyage.length > 12) {
+            result += 1;
+        }
+        if (voyage.length > 18) {
+            result -= 1;
+        }
+        return result;
+    },
+
+    withOutChinaZoneAndHistory(voyage, history) {
+        let result = getHistoryLength(history);
+        if (voyage.length > 14) {
+            result -= 1;
+        }
+        return result;
+    }
+};
 
 function rating(voyage, history) {
     const vpf = voyageProfitFactor(voyage, history);
